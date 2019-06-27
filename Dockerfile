@@ -1,10 +1,8 @@
 FROM golang:1.8-alpine
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV DEBIAN_FRONTEND teletype
-RUN apt-get update -y && apt-get install -y --no-install-recommends apt-utils
-RUN apt-get upgrade -y gcc
-RUN apt-get install libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev liblz4-dev libzstd-dev -y
+RUN echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >>/etc/apk/repositories
+RUN apk add --update --no-cache build-base linux-headers git cmake bash
+RUN apk add --update --no-cache zlib zlib-dev bzip2 bzip2-dev snappy snappy-dev lz4 lz4-dev zstd@testing zstd-dev@testing jemalloc jemalloc-dev libtbb-dev@testing libtbb@testing
 
 RUN git clone https://github.com/facebook/rocksdb.git --branch v6.1.2
 WORKDIR /tmp/rocksdb
