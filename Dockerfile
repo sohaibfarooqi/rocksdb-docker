@@ -1,3 +1,5 @@
+FROM golang:1.8-alpine
+
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBIAN_FRONTEND teletype
 RUN apt-get update -y && apt-get install -y --no-install-recommends apt-utils
